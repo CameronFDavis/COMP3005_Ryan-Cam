@@ -17,4 +17,9 @@ public class DatabaseConnection {
     }
 
     private Connection getConnection() { return connection; }
+
+    private void createAndFetchDatabase() {
+
+    }
+
 }

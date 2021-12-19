@@ -1,6 +1,4 @@
 import javax.swing.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class BookDisplayAndCart extends JFrame {
     private JPanel panelControls;
@@ -13,6 +11,9 @@ public class BookDisplayAndCart extends JFrame {
     private JTextField searchTextField;
     private JTable table1;
     private JList bookList;
+    private JButton btnCheckout;
+    private JButton btnOrders;
+    private JButton btnAdmin;
 
     public static void main(String[] args) {
         JFrame frame = new BookDisplayAndCart();

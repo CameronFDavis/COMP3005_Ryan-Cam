@@ -43,6 +43,19 @@
               <text value="Register"/>
             </properties>
           </component>
+          <component id="90c58" class="javax.swing.JButton" binding="btnOrders">
+            <constraints/>
+            <properties>
+              <text value="Track Your Order"/>
+            </properties>
+          </component>
+          <component id="7b557" class="javax.swing.JButton" binding="btnAdmin">
+            <constraints/>
+            <properties>
+              <text value="Admin View"/>
+              <visible value="false"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <grid id="2a4ad" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
@@ -111,7 +124,7 @@
           </scrollpane>
         </children>
       </grid>
-      <grid id="d8cb8" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="d8cb8" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="1" column="1" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -141,6 +154,14 @@
               </component>
             </children>
           </scrollpane>
+          <component id="15052" class="javax.swing.JButton" binding="btnCheckout">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Button"/>
+            </properties>
+          </component>
         </children>
       </grid>
     </children>

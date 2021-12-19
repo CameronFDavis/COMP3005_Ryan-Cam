@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class BookDisplayAndCart extends JFrame {
     private JPanel panelControls;
@@ -14,6 +16,26 @@ public class BookDisplayAndCart extends JFrame {
     private JButton btnCheckout;
     private JButton btnOrders;
     private JButton btnAdmin;
+
+    public BookDisplayAndCart() {
+        btnRegister.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog reg = new Register();
+                reg.pack();
+                reg.setVisible(true);
+            }
+        });
+
+        btnSignIn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog log = new Login();
+                log.pack();
+                log.setVisible(true);
+            }
+        });
+    }
 
     public static void main(String[] args) {
         JFrame frame = new BookDisplayAndCart();

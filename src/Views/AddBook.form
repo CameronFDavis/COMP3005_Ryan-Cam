@@ -260,7 +260,7 @@
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Author Details"/>
+                  <text value="Author Details (please put a comma between seperate authors in order)"/>
                 </properties>
               </component>
               <hspacer id="15c7e">
@@ -315,7 +315,7 @@
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Genre Details"/>
+                  <text value="Genre Details (please put a comma between seperate genres)"/>
                 </properties>
               </component>
               <hspacer id="2bd57">

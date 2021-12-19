@@ -84,7 +84,7 @@
               </model>
             </properties>
           </component>
-          <component id="f6efe" class="javax.swing.JButton" binding="searchButton" default-binding="true">
+          <component id="f6efe" class="javax.swing.JButton" binding="btnSearch">
             <constraints/>
             <properties>
               <text value="Search"/>

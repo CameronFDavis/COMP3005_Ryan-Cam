@@ -9,7 +9,7 @@ public class BookDisplayAndCart extends JFrame {
     private JButton btnRegister;
     private JPanel mainPanel;
     private JComboBox comboBoxSearchBy;
-    private JButton searchButton;
+    private JButton btnSearch;
     private JTextField searchTextField;
     private JTable table1;
     private JList bookList;
@@ -35,6 +35,55 @@ public class BookDisplayAndCart extends JFrame {
                 log.setVisible(true);
             }
         });
+
+        btnAdmin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog admin = new AdminView();
+                admin.pack();
+                admin.setVisible(true);
+            }
+        });
+
+        btnLogout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Logout();
+            }
+        });
+
+        btnCheckout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog checkout = new Checkout();
+                checkout.pack();
+                checkout.setVisible(true);
+            }
+        });
+
+        btnOrders.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog tracking = new Tracking();
+                tracking.pack();
+                tracking.setVisible(true);
+            }
+        });
+
+        btnSearch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Search();
+            }
+        });
+    }
+
+    private void Logout(){
+
+    }
+
+    private void Search(){
+
     }
 
     public static void main(String[] args) {

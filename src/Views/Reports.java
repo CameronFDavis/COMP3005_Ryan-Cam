@@ -43,7 +43,7 @@ public class Reports extends JDialog {
         // add your code here
         dispose();
     }
-    
+
     public static void main(String[] args) {
         Reports dialog = new Reports();
         dialog.pack();

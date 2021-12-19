@@ -1,11 +1,12 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 
-public class Controller implements ActionListener {
+public class Controller  {
 
-    public void actionPerformed(ActionEvent e) {
-
-    }
+    public static boolean signedIn = false;
+    private LookInABook mainGUI;
+    private static Connection connection;
 
     public static void main(String[] args) {
 

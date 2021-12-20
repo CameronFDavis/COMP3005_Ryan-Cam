@@ -7,6 +7,9 @@ public class Login extends JDialog {
     private JButton buttonCancel;
     private JTextField txtUsername;
     private JPasswordField txtPassword;
+    private Boolean LoggedIn = false;
+    private String userType;
+
 
     public Login() {
         setContentPane(contentPane);
@@ -15,7 +18,7 @@ public class Login extends JDialog {
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK();
+                onOK(txtUsername.getText(),txtPassword.getPassword());
             }
         });
 
@@ -41,13 +44,25 @@ public class Login extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK() {
+    private void onOK(String username,char[] password) {
         // add your code here
-        dispose();
+        String sql = "SELECT 'user_type' FROM user WHERE username = '"+username+"' and password = '"+password+"'";
+        if (!sql.isEmpty()){
+            userType = "C";
+        }
+        LoggedIn = true;
+        if (LoggedIn){
+            dispose();
+        } else if (!LoggedIn){
+            JOptionPane.showMessageDialog(contentPane, "Login Failed. Please retry.");
+        }
+
     }
 
+    public Boolean getLoggedIn(){return LoggedIn;}
+    public String getUserType(){return userType;}
+
     private void onCancel() {
-        // add your code here if necessary
         dispose();
     }
 

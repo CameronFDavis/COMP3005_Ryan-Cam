@@ -17,7 +17,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="64af9" class="javax.swing.JLabel">
+          <component id="64af9" class="javax.swing.JLabel" binding="SignInStatus">
             <constraints/>
             <properties>
               <text value="Not Signed In"/>

@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class BookDisplayAndCart extends JFrame {
     private JPanel panelControls;
@@ -16,6 +18,7 @@ public class BookDisplayAndCart extends JFrame {
     private JButton btnCheckout;
     private JButton btnOrders;
     private JButton btnAdmin;
+    private JLabel SignInStatus;
 
     public BookDisplayAndCart() {
         btnRegister.addActionListener(new ActionListener() {
@@ -33,6 +36,19 @@ public class BookDisplayAndCart extends JFrame {
                 JDialog log = new Login();
                 log.pack();
                 log.setVisible(true);
+                log.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        System.out.println(((Login) log).getLoggedIn());
+                        SignInStatus.setText("Signed In");
+                        btnSignIn.setVisible(false);
+                        btnLogout.setVisible(true);
+                        btnRegister.setVisible(false);
+                        if (((Login) log).getUserType() == "E") {
+                            btnAdmin.setVisible(true);
+                        }
+                    }
+                });
             }
         });
 
@@ -42,13 +58,20 @@ public class BookDisplayAndCart extends JFrame {
                 JDialog admin = new AdminView();
                 admin.pack();
                 admin.setVisible(true);
+
             }
         });
 
         btnLogout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Logout();
+                //LoggedIn = false;
+                SignInStatus.setText("Not Signed In");
+                btnRegister.setVisible(true);
+                btnSignIn.setVisible(true);
+                btnLogout.setVisible(false);
+                btnAdmin.setVisible(false);
+
             }
         });
 
@@ -73,16 +96,12 @@ public class BookDisplayAndCart extends JFrame {
         btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Search();
+                Search(comboBoxSearchBy.getSelectedItem().toString(),searchTextField.getText());
             }
         });
     }
 
-    private void Logout(){
-
-    }
-
-    private void Search(){
+    private void Search(String getType,String searchText){
 
     }
 

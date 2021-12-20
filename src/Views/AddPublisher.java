@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.event.*;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -60,6 +61,7 @@ public class AddPublisher extends JDialog {
     private void onOK() throws SQLException {
         // add your code here
 
+        Connection con = DatabaseConnection.openConnection();
         String InsertToAddressesSQL = "INSERT IGNORE INTO addresses (street, city, province,postal_code) VALUES (?, ?, ?, ?)";
         String GetLastInsertSQL = "SELECT LAST_INSERT_ID();";
         String InsertToPublishersSQL = "INSERT IGNORE INTO publishers (name, email, banking_account, address_id) VALUES (?, ?, ?, ?)";
@@ -90,6 +92,7 @@ public class AddPublisher extends JDialog {
 
             dispose();
         }
+        DatabaseConnection.closeConnection();
     }
 
     private void onCancel() {

@@ -1,5 +1,7 @@
 import javax.swing.*;
+import javax.xml.crypto.Data;
 import java.awt.event.*;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -52,11 +54,12 @@ public class RemovePublisher extends JDialog {
         String sql1 = "SELECT * FROM publishers WHERE publisher_id = '?'";
         String sql2 = "DELETE FROM publishers WHERE publisher_id = '?'";
 
+        Connection con = DatabaseConnection.openConnection();
         try (PreparedStatement CheckForExistingEntry = con.prepareStatement(sql1);
              PreparedStatement DeleteEntry = con.prepareStatement(sql2)) {
 
             CheckForExistingEntry.setString(1, pubID);
-            ResultSet resultSet = CheckForExisitingEntry.executeQuery();
+            ResultSet resultSet = CheckForExistingEntry.executeQuery();
 
             if (resultSet.next()) {
                 JOptionPane.showMessageDialog(contentPane, "This book doesn't exist in the database please try another ISBN");
@@ -66,6 +69,7 @@ public class RemovePublisher extends JDialog {
                 dispose();
             }
         }
+        DatabaseConnection.closeConnection();
     }
 
     private void onCancel() {

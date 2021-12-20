@@ -1,0 +1,14 @@
+{
+	"rcampbell": {
+		"password": "123",
+		"first_name": "Ryan",
+		"last_name": "Campbell",
+		"user_type": "E"
+	},
+	"cdavis": {
+		"password": "123",
+		"first_name": "Cameron",
+		"last_name": "Davis",
+		"user_type": "C"
+	}
+}

@@ -1,5 +1,8 @@
+import org.h2.engine.Database;
+
 import javax.swing.*;
 import java.awt.event.*;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -54,11 +57,12 @@ public class RemoveBook extends JDialog {
         String sql1 = "SELECT * FROM books WHERE ISBN = '?'";
         String sql2 = "DELETE FROM books WHERE ISBN = '?'";
 
+        Connection con = DatabaseConnection.openConnection();
         try (PreparedStatement CheckForExistingEntry = con.prepareStatement(sql1);
              PreparedStatement DeleteEntry = con.prepareStatement(sql2)) {
 
             CheckForExistingEntry.setString(1, bookISBN);
-            ResultSet resultSet = CheckForExisitingEntry.executeQuery();
+            ResultSet resultSet = CheckForExistingEntry.executeQuery();
 
             if (resultSet.next()) {
                 JOptionPane.showMessageDialog(contentPane, "This book doesn't exist in the database please try another ISBN");
@@ -68,6 +72,7 @@ public class RemoveBook extends JDialog {
                 dispose();
             }
         }
+        DatabaseConnection.closeConnection();
     }
 
     private void onCancel() {

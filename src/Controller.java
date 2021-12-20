@@ -1,5 +1,3 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.Connection;
 
 public class Controller  {
@@ -8,6 +6,7 @@ public class Controller  {
     private static Connection connection;
 
     public static void main(String[] args) {
-
+        DatabaseConnection.populateDatabase(DatabaseConnection.openConnection());
+        DatabaseConnection.closeConnection();
     }
 }

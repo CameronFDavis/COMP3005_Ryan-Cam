@@ -14,7 +14,7 @@ public class RemovePublisher extends JDialog {
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK();
+                onOK(txtPubID.getText());
             }
         });
 
@@ -40,9 +40,15 @@ public class RemovePublisher extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK() {
+    private void onOK(String pubID) {
         // add your code here
-        dispose();
+        String sql1 = "SELECT * FROM publishers WHERE publisher_id = '" + pubID + "'";
+        if (sql1.isEmpty()){
+            JOptionPane.showMessageDialog(contentPane, "This publisher doesn't exist in the database please try another ID");
+        } else {
+            String sql2 = "DELETE FROM publishers WHERE publisher_id = '" + pubID + "'";
+            dispose();
+        }
     }
 
     private void onCancel() {

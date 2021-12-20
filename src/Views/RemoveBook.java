@@ -14,7 +14,7 @@ public class RemoveBook extends JDialog {
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK();
+                onOK(txtISBN.getText());
             }
         });
 
@@ -40,9 +40,15 @@ public class RemoveBook extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK() {
+    private void onOK(String bookISBN) {
         // add your code here
-        dispose();
+        String sql1 = "SELECT * FROM books WHERE ISBN = '"+bookISBN+"'";
+        if (sql1.isEmpty()){
+            JOptionPane.showMessageDialog(contentPane, "This book doesn't exist in the database please try another ISBN");
+        } else {
+            String sql2 = "DELETE FROM books WHERE ISBN = '" + bookISBN + "'";
+            dispose();
+        }
     }
 
     private void onCancel() {

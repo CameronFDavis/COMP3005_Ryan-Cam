@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.awt.event.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class RemoveBook extends JDialog {
     private JPanel contentPane;
@@ -14,7 +17,13 @@ public class RemoveBook extends JDialog {
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK(txtISBN.getText());
+
+                try {
+                    onOK(txtISBN.getText());
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+
             }
         });
 
@@ -40,14 +49,24 @@ public class RemoveBook extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK(String bookISBN) {
+    private void onOK(String bookISBN) throws SQLException {
         // add your code here
-        String sql1 = "SELECT * FROM books WHERE ISBN = '"+bookISBN+"'";
-        if (sql1.isEmpty()){
-            JOptionPane.showMessageDialog(contentPane, "This book doesn't exist in the database please try another ISBN");
-        } else {
-            String sql2 = "DELETE FROM books WHERE ISBN = '" + bookISBN + "'";
-            dispose();
+        String sql1 = "SELECT * FROM books WHERE ISBN = '?'";
+        String sql2 = "DELETE FROM books WHERE ISBN = '?'";
+
+        try (PreparedStatement CheckForExistingEntry = con.prepareStatement(sql1);
+             PreparedStatement DeleteEntry = con.prepareStatement(sql2)) {
+
+            CheckForExistingEntry.setString(1, bookISBN);
+            ResultSet resultSet = CheckForExisitingEntry.executeQuery();
+
+            if (resultSet.next()) {
+                JOptionPane.showMessageDialog(contentPane, "This book doesn't exist in the database please try another ISBN");
+            } else {
+                DeleteEntry.setString(1, bookISBN);
+                DeleteEntry.executeQuery();
+                dispose();
+            }
         }
     }
 

@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.awt.event.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class AddPublisher extends JDialog {
     private JPanel contentPane;
@@ -24,7 +27,11 @@ public class AddPublisher extends JDialog {
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK();
+                try {
+                    onOK();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 
@@ -50,9 +57,39 @@ public class AddPublisher extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK() {
+    private void onOK() throws SQLException {
         // add your code here
-        dispose();
+
+        String InsertToAddressesSQL = "INSERT IGNORE INTO addresses (street, city, province,postal_code) VALUES (?, ?, ?, ?)";
+        String GetLastInsertSQL = "SELECT LAST_INSERT_ID();";
+        String InsertToPublishersSQL = "INSERT IGNORE INTO publishers (name, email, banking_account, address_id) VALUES (?, ?, ?, ?)";
+        String InsertToPublisherPhoneNumberSQL = "INSERT IGNORE INTO publishers_phone_number (phone_number, publisher_id) VALUES (?, ?)";
+        try (PreparedStatement InsertToAddresses = con.prepareStatement(InsertToAddressesSQL);
+             PreparedStatement GetLastInsert = con.prepareStatement(GetLastInsertSQL);
+             PreparedStatement InsertToPublishers = con.prepareStatement(InsertToPublishersSQL);
+             PreparedStatement InsertToPublisherPhoneNumber = con.prepareStatement(InsertToPublisherPhoneNumberSQL)) {
+            InsertToAddresses.setString(1, txtStreet.getText());
+            InsertToAddresses.setString(2, txtCity.getText());
+            InsertToAddresses.setString(3, txtProvince.getText());
+            InsertToAddresses.setString(4, txtPostalCode.getText());
+
+            InsertToAddresses.executeQuery();
+            ResultSet resultSet = GetLastInsert.executeQuery();
+
+            InsertToPublishers.setString(1, txtName.getText());
+            InsertToPublishers.setString(2, txtEmail.getText());
+            InsertToPublishers.setString(3, txtBanking.getText());
+            InsertToPublishers.setString(4, resultSet.getLong("address_id"));
+            InsertToPublishers.executeQuery();
+
+            resultSet = GetLastInsert.executeQuery();
+
+            InsertToPublisherPhoneNumber.setString(1, txtPhone.getText());
+            InsertToPublisherPhoneNumber.setString(2, resultSet.getLong("publisher_id"));
+            InsertToPublisherPhoneNumber.executeQuery();
+
+            dispose();
+        }
     }
 
     private void onCancel() {

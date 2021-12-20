@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.awt.event.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class RemovePublisher extends JDialog {
     private JPanel contentPane;
@@ -14,7 +17,11 @@ public class RemovePublisher extends JDialog {
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK(txtPubID.getText());
+                try {
+                    onOK(txtPubID.getText());
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 
@@ -40,14 +47,24 @@ public class RemovePublisher extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK(String pubID) {
+    private void onOK(String pubID) throws SQLException {
         // add your code here
-        String sql1 = "SELECT * FROM publishers WHERE publisher_id = '" + pubID + "'";
-        if (sql1.isEmpty()){
-            JOptionPane.showMessageDialog(contentPane, "This publisher doesn't exist in the database please try another ID");
-        } else {
-            String sql2 = "DELETE FROM publishers WHERE publisher_id = '" + pubID + "'";
-            dispose();
+        String sql1 = "SELECT * FROM publishers WHERE publisher_id = '?'";
+        String sql2 = "DELETE FROM publishers WHERE publisher_id = '?'";
+
+        try (PreparedStatement CheckForExistingEntry = con.prepareStatement(sql1);
+             PreparedStatement DeleteEntry = con.prepareStatement(sql2)) {
+
+            CheckForExistingEntry.setString(1, pubID);
+            ResultSet resultSet = CheckForExisitingEntry.executeQuery();
+
+            if (resultSet.next()) {
+                JOptionPane.showMessageDialog(contentPane, "This book doesn't exist in the database please try another ISBN");
+            } else {
+                DeleteEntry.setString(1, pubID);
+                DeleteEntry.executeQuery();
+                dispose();
+            }
         }
     }
 

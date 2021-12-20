@@ -46,7 +46,7 @@ public class Login extends JDialog {
 
     private void onOK(String username,char[] password) {
         // add your code here
-        String sql = "SELECT 'user_type' FROM user WHERE username = '"+username+"' and password = '"+password+"'";
+        String sql = "SELECT 'user_type' FROM user WHERE username = ? and password = ?";
         if (!sql.isEmpty()){
             userType = "C";
         }

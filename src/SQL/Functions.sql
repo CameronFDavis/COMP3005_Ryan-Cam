@@ -1,0 +1,1 @@
+CREATE FUNCTION book_cost

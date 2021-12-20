@@ -51,8 +51,8 @@ public class RemovePublisher extends JDialog {
 
     private void onOK(String pubID) throws SQLException {
         // add your code here
-        String sql1 = "SELECT * FROM publishers WHERE publisher_id = '?'";
-        String sql2 = "DELETE FROM publishers WHERE publisher_id = '?'";
+        String sql1 = "SELECT * FROM publishers WHERE publisher_id = ?";
+        String sql2 = "DELETE FROM publishers WHERE publisher_id = ?";
 
         Connection con = DatabaseConnection.openConnection();
         try (PreparedStatement CheckForExistingEntry = con.prepareStatement(sql1);

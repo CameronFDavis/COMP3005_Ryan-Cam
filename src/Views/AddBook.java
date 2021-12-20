@@ -59,41 +59,41 @@ public class AddBook extends JDialog {
     }
 
     private void onOK() {
-        // add your code here
-        String InsertToBookSQL = "INSERT IGNORE INTO books (ISBN, name, page_count,price,year,binding,percent_to_pub,stock,publisher_id) VALUES (?, ?, ?, ?,?,?,?,?,?)";
-        String InsertToAuthors = "INSERT IGNORE INTO authors (first_name, last_name) VALUES (?, ?)";
-        String InsertToWrittenBy = "INSERT IGNORE INTO written_by (first_name, last_name,ISBN) VALUES (?, ?,?)";
-        String InsertToGenres = "INSERT IGNORE INTO genres (genre) VALUES (?)";
-        String InsertToHasGenre = "INSERT IGNORE INTO has_genre (ISBN, genre) VALUES (?, ?)";
-        String InsertToPublishersSQL = "INSERT IGNORE INTO publishers (name, email, banking_account, address_id) VALUES (?, ?, ?, ?)";
-        String InsertToPublisherPhoneNumberSQL = "INSERT IGNORE INTO publishers_phone_number (phone_number, publisher_id) VALUES (?, ?)";
-        try (PreparedStatement InsertToAddresses = con.prepareStatement(InsertToAddressesSQL);
-             PreparedStatement GetLastInsert = con.prepareStatement(GetLastInsertSQL);
-             PreparedStatement InsertToPublishers = con.prepareStatement(InsertToPublishersSQL);
-             PreparedStatement InsertToPublisherPhoneNumber = con.prepareStatement(InsertToPublisherPhoneNumberSQL)) {
-            InsertToAddresses.setString(1, txtStreet.getText());
-            InsertToAddresses.setString(2, txtCity.getText());
-            InsertToAddresses.setString(3, txtProvince.getText());
-            InsertToAddresses.setString(4, txtPostalCode.getText());
-
-            InsertToAddresses.executeQuery();
-            ResultSet resultSet = GetLastInsert.executeQuery();
-
-            InsertToPublishers.setString(1, txtName.getText());
-            InsertToPublishers.setString(2, txtEmail.getText());
-            InsertToPublishers.setString(3, txtBanking.getText());
-            InsertToPublishers.setString(4, resultSet.getLong("address_id"));
-            InsertToPublishers.executeQuery();
-
-            resultSet = GetLastInsert.executeQuery();
-
-            InsertToPublisherPhoneNumber.setString(1, txtPhone.getText());
-            InsertToPublisherPhoneNumber.setString(2, resultSet.getLong("publisher_id"));
-            InsertToPublisherPhoneNumber.executeQuery();
-
-            dispose();
-        }
-        dispose();
+    //    // add your code here
+    //    String InsertToBookSQL = "INSERT IGNORE INTO books (ISBN, name, page_count,price,year,binding,percent_to_pub,stock,publisher_id) VALUES (?, ?, ?, ?,?,?,?,?,?)";
+    //    String InsertToAuthors = "INSERT IGNORE INTO authors (first_name, last_name) VALUES (?, ?)";
+    //    String InsertToWrittenBy = "INSERT IGNORE INTO written_by (first_name, last_name,ISBN) VALUES (?, ?,?)";
+    //    String InsertToGenres = "INSERT IGNORE INTO genres (genre) VALUES (?)";
+    //    String InsertToHasGenre = "INSERT IGNORE INTO has_genre (ISBN, genre) VALUES (?, ?)";
+    //    String InsertToPublishersSQL = "INSERT IGNORE INTO publishers (name, email, banking_account, address_id) VALUES (?, ?, ?, ?)";
+    //    String InsertToPublisherPhoneNumberSQL = "INSERT IGNORE INTO publishers_phone_number (phone_number, publisher_id) VALUES (?, ?)";
+    //    try (PreparedStatement InsertToAddresses = con.prepareStatement(InsertToAddressesSQL);
+    //         PreparedStatement GetLastInsert = con.prepareStatement(GetLastInsertSQL);
+    //         PreparedStatement InsertToPublishers = con.prepareStatement(InsertToPublishersSQL);
+    //         PreparedStatement InsertToPublisherPhoneNumber = con.prepareStatement(InsertToPublisherPhoneNumberSQL)) {
+    //        InsertToAddresses.setString(1, txtStreet.getText());
+    //        InsertToAddresses.setString(2, txtCity.getText());
+    //        InsertToAddresses.setString(3, txtProvince.getText());
+    //        InsertToAddresses.setString(4, txtPostalCode.getText());
+//
+    //        InsertToAddresses.executeQuery();
+    //        ResultSet resultSet = GetLastInsert.executeQuery();
+//
+    //        InsertToPublishers.setString(1, txtName.getText());
+    //        InsertToPublishers.setString(2, txtEmail.getText());
+    //        InsertToPublishers.setString(3, txtBanking.getText());
+    //        InsertToPublishers.setString(4, resultSet.getLong("address_id"));
+    //        InsertToPublishers.executeQuery();
+//
+    //        resultSet = GetLastInsert.executeQuery();
+//
+    //        InsertToPublisherPhoneNumber.setString(1, txtPhone.getText());
+    //        InsertToPublisherPhoneNumber.setString(2, resultSet.getLong("publisher_id"));
+    //        InsertToPublisherPhoneNumber.executeQuery();
+//
+    //        dispose();
+    //    }
+    //    dispose();
     }
 
     private void onCancel() {

@@ -1,3 +1,4 @@
+-- Drop tables to ensure no creation conflict
 DROP TABLE IF EXISTS users CASCADE;
 
 DROP TABLE IF EXISTS tracking CASCADE;
@@ -22,6 +23,7 @@ DROP TABLE IF EXISTS authors CASCADE;
 
 DROP TABLE IF EXISTS books CASCADE;
 
+-- Create all the tables
 CREATE TABLE addresses (
 	address_id INT AUTO_INCREMENT,
 	street VARCHAR(255) NOT NULL,

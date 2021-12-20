@@ -54,8 +54,8 @@ public class RemoveBook extends JDialog {
 
     private void onOK(String bookISBN) throws SQLException {
         // add your code here
-        String sql1 = "SELECT * FROM books WHERE ISBN = '?'";
-        String sql2 = "DELETE FROM books WHERE ISBN = '?'";
+        String sql1 = "SELECT * FROM books WHERE ISBN = ?";
+        String sql2 = "DELETE FROM books WHERE ISBN = ?";
 
         Connection con = DatabaseConnection.openConnection();
         try (PreparedStatement CheckForExistingEntry = con.prepareStatement(sql1);

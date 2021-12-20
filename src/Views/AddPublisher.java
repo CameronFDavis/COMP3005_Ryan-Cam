@@ -63,7 +63,7 @@ public class AddPublisher extends JDialog {
 
         Connection con = DatabaseConnection.openConnection();
         String InsertToAddressesSQL = "INSERT IGNORE INTO addresses (street, city, province,postal_code) VALUES (?, ?, ?, ?)";
-        String GetLastInsertSQL = "SELECT LAST_INSERT_ID();";
+        String GetLastInsertSQL = "SELECT LAST_INSERT_ID()";
         String InsertToPublishersSQL = "INSERT IGNORE INTO publishers (name, email, banking_account, address_id) VALUES (?, ?, ?, ?)";
         String InsertToPublisherPhoneNumberSQL = "INSERT IGNORE INTO publishers_phone_number (phone_number, publisher_id) VALUES (?, ?)";
         try (PreparedStatement InsertToAddresses = con.prepareStatement(InsertToAddressesSQL);
@@ -81,13 +81,13 @@ public class AddPublisher extends JDialog {
             InsertToPublishers.setString(1, txtName.getText());
             InsertToPublishers.setString(2, txtEmail.getText());
             InsertToPublishers.setString(3, txtBanking.getText());
-            InsertToPublishers.setString(4, resultSet.getLong("address_id"));
+            InsertToPublishers.setString(4, resultSet.getString("address_id"));
             InsertToPublishers.executeQuery();
 
             resultSet = GetLastInsert.executeQuery();
 
             InsertToPublisherPhoneNumber.setString(1, txtPhone.getText());
-            InsertToPublisherPhoneNumber.setString(2, resultSet.getLong("publisher_id"));
+            InsertToPublisherPhoneNumber.setString(2, resultSet.getString("publisher_id"));
             InsertToPublisherPhoneNumber.executeQuery();
 
             dispose();
